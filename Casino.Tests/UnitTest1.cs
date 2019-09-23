@@ -1,6 +1,7 @@
 using NUnit.Framework;
+using Casino;
 
-namespace Tests
+namespace Casino.Tests
 {
     public class Tests
     {
@@ -12,7 +13,8 @@ namespace Tests
         [Test]
         public void Test1()
         {
-            Assert.Pass();
+            int x = Program.Test(2, 3);
+            Assert.AreEqual(5, x);
         }
     }
 }
