@@ -18,11 +18,11 @@ namespace Casino
 
         public void RunSlot()
         {
-            while (player.Amount >= bet)
+            while (true)
             {
                 Thread.Sleep(200);
                 player.Amount -= bet;
-                int getEffort = new Random().Next(40, 4500);
+                int getEffort = new Random().Next(293, 4500);
                 foreach (var item in slot.reels)
                 {
                     item.CurrentPosition = (item.CurrentPosition + (getEffort / item.RotationSpeed)) % Reel.numberOfPositions;
@@ -36,13 +36,30 @@ namespace Casino
                 }
                 else
                 {
-                    Console.WriteLine("You LOSE!!!");
-                    Console.WriteLine($"Your new amount is ${player.Amount}");
+                    LoseEvent();
+                }
+                Console.WriteLine("Press SPACE button to continue or any other key for exit\n");
+                ConsoleKeyInfo choose = Console.ReadKey();
+                if (choose.KeyChar == ' ') continue;
+                else
+                {
+                    MainMenu.ChooseGame(player);
                 }
             }
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"\nHey, {player.Name}! You have no money for one more bet! GAME OVER!");
 
+        }
+
+        private void LoseEvent()
+        {
+            Console.WriteLine("You LOSE!!!");
+            Console.WriteLine($"Your new amount is ${player.Amount}");
+            if (player.Amount < bet)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("You have no money for one more bet! Goodbye.");
+                Console.ResetColor();
+                MainMenu.ChooseGame(player);
+            }
         }
 
         private void WinEvent()
