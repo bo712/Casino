@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using Casino;
 
 namespace Casino.Tests
 {
