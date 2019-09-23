@@ -12,7 +12,7 @@ namespace Casino.Tests
         [Test]
         public void Test1()
         {
-            int x = Program.Test(2, 3);
+            int x = MainMenu.Test(2, 3);
             Assert.AreEqual(5, x);
         }
     }
