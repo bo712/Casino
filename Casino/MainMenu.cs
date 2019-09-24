@@ -22,13 +22,14 @@ namespace Casino
             Console.WriteLine("2 - Drunkard;");
             Console.WriteLine("0 - Exit;");
             var choose = Console.ReadLine();
+            Console.WriteLine();
 
             switch (choose)
             {
                 case "1":
                 default:
                     SlotGame slotGame = new SlotGame(player);
-                    slotGame.RunSlot();
+                    slotGame.StartGame();
                     break;
                 case "2":
                     DrunkardGame drunkardGame = new DrunkardGame(player);
@@ -36,7 +37,8 @@ namespace Casino
                     break;
                 case "0":
                     Console.WriteLine("Thank you for your time! Goodbye!");
-                    Thread.Sleep(3000);
+                    Thread.Sleep(1000);
+                    Environment.Exit(0);
                     break;
             }
         }
