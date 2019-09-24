@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace Casino
 {
-    class MainMenu
+    public class MainMenu
     {
         static void Main(string[] args)
         {
@@ -33,7 +33,7 @@ namespace Casino
                     break;
                 case "2":
                     DrunkardGame drunkardGame = new DrunkardGame(player);
-                    drunkardGame.RunDrunkard();
+                    drunkardGame.StartGame();
                     break;
                 case "0":
                     Console.WriteLine("Thank you for your time! Goodbye!");

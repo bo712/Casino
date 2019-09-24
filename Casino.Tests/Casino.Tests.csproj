@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Casino\Casino.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Slot\" />
+    <Folder Include="Drunkard\" />
+  </ItemGroup>
 </Project>

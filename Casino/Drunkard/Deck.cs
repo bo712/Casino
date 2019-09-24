@@ -3,25 +3,23 @@ namespace Casino
 {
     public class Deck
     {
-        private readonly int _deckSize;
-        public int[] decks;
+        public const int deckSize = 36;
+        public int[] cards = new int[deckSize];
 
-        public Deck(int deckSize)
+        public Deck()
         {
-            _deckSize = deckSize;
-            decks = new int[_deckSize];
-            decks = FillDeck(decks, _deckSize);
-            decks = ShakeDeck(decks, _deckSize);
+            FillDeck(cards, deckSize);
+            ShakeDeck(cards, deckSize);
         }
 
         public Suit GetSuit(int cardNumber)
         {
-            return (Suit)(cardNumber / (_deckSize / 4));
+            return (Suit)(cardNumber / (deckSize / 4));
         }
 
-        public Par GetPar(int cardNumber)
+        public Par36 GetPar(int cardNumber)
         {
-            return (Par)(cardNumber % (_deckSize / 4));
+            return (Par36)(cardNumber % (deckSize / 4));
         }
 
         public string ToString(int cardNumber)
@@ -30,51 +28,50 @@ namespace Casino
             return GetPar(cardNumber) + " " + GetSuit(cardNumber);
         }
 
-        public int[] FillDeck(int[] deck, int deckSize)
+        public static void FillDeck(int[] cards, int deckSize)
         {
             for (int i = 0; i < deckSize; i++)
             {
-                deck[i] = i;
+                cards[i] = i;
             }
-            return deck;
         }
 
-        public int[] ShakeDeck(int[] deck, int deckSize)
+        public void ShakeDeck(int[] cards, int deckSize)
         {
             //calculate checksum of deck
-            int sumBeforeShake = 0;
-            for (int i = 0; i < deckSize; i++)
-            {
-                sumBeforeShake += deck[i];
-            }
+            int sumBeforeShake = CalculateCheckSum(cards, deckSize);
 
             for (int i = 0; i < 8000; i++)
             {
                 Random random = new Random();
                 int indexFrom = random.Next(0, (deckSize - 1));
                 int indexTo = random.Next(0, (deckSize - 1));
-                int temp = deck[indexFrom];
-                deck[indexFrom] = deck[indexTo];
-                deck[indexTo] = temp;
+                int temp = cards[indexFrom];
+                cards[indexFrom] = cards[indexTo];
+                cards[indexTo] = temp;
             }
 
             //calculate checksum of shaked deck
-            int sumAfterShake = 0;
-            for (int i = 0; i < deckSize; i++)
-            {
-                sumAfterShake += deck[i];
-            }
-
+            int sumAfterShake = CalculateCheckSum(cards, deckSize);
             if (sumBeforeShake != sumAfterShake)
                 throw new Exception("Bad shaking!");
-            return deck;
+        }
+
+        private static int CalculateCheckSum(int[] cards, int deckSize)
+        {
+            int sum = 0;
+            foreach (var card in cards)
+            {
+                sum += card;
+            }
+            return sum;
         }
 
         public void PrintDeck()
         {
-            for (int i = 0; i < _deckSize; i++)
+            for (int i = 0; i < deckSize; i++)
             {
-                Console.WriteLine(ToString(decks[i]));
+                Console.WriteLine(ToString(cards[i]));
             }
         }
     }

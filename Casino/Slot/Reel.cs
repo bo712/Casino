@@ -11,7 +11,7 @@ namespace Casino
         {
             Random random = new Random();
             RotationSpeed = random.Next(17, 127); //how easy reel rotates
-            CurrentPosition = random.Next(0, numberOfPositions);
+            CurrentPosition = random.Next(0, numberOfPositions - 1);
         }
     }
 }

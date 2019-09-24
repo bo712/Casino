@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Casino
 {
-    public enum Par
+    public enum Par36
     {
         six,
         seven,
