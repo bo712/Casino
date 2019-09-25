@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Casino
 {
     public class DrunkardGame
     {
-        private Player player;
-        private int bet;
+        private Player player = null;
+        private int bet = 0;
         private Deck gameDeck = new Deck();
         private Queue<int> playersCards = new Queue<int>();
         private Queue<int> croupiersCards = new Queue<int>();
@@ -15,14 +16,12 @@ namespace Casino
         {
             this.player = player;
             Console.WriteLine($"You have ${player.Amount}. Please, input your bet:");
-            string inputString = Console.ReadLine();
-            GetBet(inputString);
+            GetBet();
         }
 
         internal void StartGame()
         {
             var decksOnDesk = new List<int>();
-
             DealingCards();
 
             while (playersCards.Count != 0 && croupiersCards.Count != 0)
@@ -52,24 +51,32 @@ namespace Casino
 
         }
 
-        private void GetBet(string inputString)
+        private void GetBet()
         {
-            try
+            while (bet == 0)
             {
-                bet = int.Parse(inputString);
-            }
-            catch (System.FormatException)
-            {
-                Console.WriteLine("Your input is incorrect. Please, input your bet using the numbers:");
-                inputString = Console.ReadLine();
-                GetBet(inputString);
-            }
+                try
+                {
+                    bet = int.Parse(Console.ReadLine());
+                    if (bet > player.Amount)
+                    {
+                        Console.WriteLine("You don't have enough money for that bet. Please enter another amount:");
+                        bet = 0;
+                    }
+                    else if (bet <= 0)
+                    {
+                        Console.WriteLine("Bet must have positive value. Please enter another amount:");
+                    }
 
-            if (bet > player.Amount)
-            {
-                Console.WriteLine("You don't have enough money for that bet. Please enter another amount:");
-                inputString = Console.ReadLine();
-                GetBet(inputString);
+                }
+                catch (System.FormatException)
+                {
+                    Console.WriteLine("Your input is incorrect. Please, input your bet using the numbers:");
+                }
+                catch (System.OverflowException)
+                {
+                    Console.WriteLine("Your bet is too large. Please, input correct bet.");
+                }
             }
         }
 
@@ -101,6 +108,7 @@ namespace Casino
             decksOnDesk.Add(croupiersCard);
             Console.WriteLine($"Your card - {gameDeck.ToString(playersCard)}");
             Console.WriteLine($"Croupier's card - {gameDeck.ToString(croupiersCard)}");
+            Thread.Sleep(100);
         }
 
         private void DealingCards()

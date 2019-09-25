@@ -21,13 +21,12 @@ namespace Casino
             Console.WriteLine("1 - Slot (One hand bandit);");
             Console.WriteLine("2 - Drunkard;");
             Console.WriteLine("0 - Exit;");
-            var choose = Console.ReadLine();
+            var choose = Console.ReadLine().Trim();
             Console.WriteLine();
 
             switch (choose)
             {
                 case "1":
-                default:
                     SlotGame slotGame = new SlotGame(player);
                     slotGame.StartGame();
                     break;
@@ -40,6 +39,9 @@ namespace Casino
                     Thread.Sleep(1000);
                     Environment.Exit(0);
                     break;
+                default:
+                    Console.WriteLine("You  entered wrong value, so you will play in Slot");
+                    goto case "1";
             }
         }
     }

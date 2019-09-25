@@ -10,12 +10,11 @@ namespace Casino.Tests
         [Test]
         public void FillDeck_10itemsEmptyArrray_SortedArray1to10()
         {
-            int size = 20;
-            int[] array = new int[size];
+            int[] array = new int[20];
             int[] expected = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
             bool filledGood = true;
 
-            Deck.FillDeck(array, size);
+            Deck.FillDeck(array);
             for (int i = 0; i < array.Length; i++)
             {
                 if (array[i] != expected[i])
@@ -32,6 +31,7 @@ namespace Casino.Tests
         {
             int[] array = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
             bool allCardsInDeck = true;
+            Deck.ShakeDeck(array);
             for (int i = 0; i < array.Length; i++)
             {
                 if (!array.Contains(i))
@@ -41,12 +41,6 @@ namespace Casino.Tests
                 }
             }
             Assert.IsTrue(allCardsInDeck);
-        }
-
-        [Test]
-        public void Test2()
-        {
-
         }
     }
 }

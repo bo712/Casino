@@ -8,8 +8,8 @@ namespace Casino
 
         public Deck()
         {
-            FillDeck(cards, deckSize);
-            ShakeDeck(cards, deckSize);
+            FillDeck(cards);
+            ShakeDeck(cards);
         }
 
         public Suit GetSuit(int cardNumber)
@@ -24,40 +24,37 @@ namespace Casino
 
         public string ToString(int cardNumber)
         {
-            //Console.WriteLine(GetPar(cardNumber) + " " + GetSuit(cardNumber));
             return GetPar(cardNumber) + " " + GetSuit(cardNumber);
         }
 
-        public static void FillDeck(int[] cards, int deckSize)
+        public static void FillDeck(int[] cards)
         {
-            for (int i = 0; i < deckSize; i++)
+            for (int i = 0; i < cards.Length; i++)
             {
                 cards[i] = i;
             }
         }
 
-        public void ShakeDeck(int[] cards, int deckSize)
+        public static void ShakeDeck(int[] cards)
         {
-            //calculate checksum of deck
-            int sumBeforeShake = CalculateCheckSum(cards, deckSize);
+            int sumBeforeShake = CalculateCheckSum(cards);
 
             for (int i = 0; i < 8000; i++)
             {
                 Random random = new Random();
-                int indexFrom = random.Next(0, (deckSize - 1));
-                int indexTo = random.Next(0, (deckSize - 1));
+                int indexFrom = random.Next(0, (cards.Length - 1));
+                int indexTo = random.Next(0, (cards.Length - 1));
                 int temp = cards[indexFrom];
                 cards[indexFrom] = cards[indexTo];
                 cards[indexTo] = temp;
             }
 
-            //calculate checksum of shaked deck
-            int sumAfterShake = CalculateCheckSum(cards, deckSize);
+            int sumAfterShake = CalculateCheckSum(cards);
             if (sumBeforeShake != sumAfterShake)
                 throw new Exception("Bad shaking!");
         }
 
-        private static int CalculateCheckSum(int[] cards, int deckSize)
+        private static int CalculateCheckSum(int[] cards)
         {
             int sum = 0;
             foreach (var card in cards)
@@ -65,14 +62,6 @@ namespace Casino
                 sum += card;
             }
             return sum;
-        }
-
-        public void PrintDeck()
-        {
-            for (int i = 0; i < deckSize; i++)
-            {
-                Console.WriteLine(ToString(cards[i]));
-            }
         }
     }
 }

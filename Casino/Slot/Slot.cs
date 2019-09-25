@@ -16,6 +16,7 @@ namespace Casino
 
         public void RunSlot()
         {
+            Console.WriteLine("You pulled the lever and you see these values:");
             int getEffort = new Random().Next(293, 4500);
 
             foreach (var item in this.reels)
