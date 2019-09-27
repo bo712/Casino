@@ -17,6 +17,10 @@ namespace Casino
 
         public static void ChooseGame(Player player)
         {
+            if (player.Amount == 0)
+            {
+                NoMoney();
+            }
             Console.WriteLine("Choose the game: ");
             Console.WriteLine("1 - Slot (One hand bandit);");
             Console.WriteLine("2 - Drunkard;");
@@ -43,6 +47,13 @@ namespace Casino
                     Console.WriteLine("You  entered wrong value, so you will play in Slot");
                     goto case "1";
             }
+        }
+
+        private static void NoMoney()
+        {
+            Console.WriteLine("You totally gambled away your money. Goodbye!");
+            Thread.Sleep(1000);
+            Environment.Exit(0);
         }
     }
 }
