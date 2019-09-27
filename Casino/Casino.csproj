@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BlackJack\" />
     <Folder Include="Slot\" />
   </ItemGroup>
 </Project>

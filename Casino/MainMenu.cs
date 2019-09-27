@@ -38,6 +38,9 @@ namespace Casino
                     DrunkardGame drunkardGame = new DrunkardGame(player);
                     drunkardGame.StartGame();
                     break;
+                case "3":
+                    BlackJackGame bj = new BlackJackGame(player);
+                    break;
                 case "0":
                     Console.WriteLine("Thank you for your time! Goodbye!");
                     Thread.Sleep(1000);

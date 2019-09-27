@@ -1,22 +1,22 @@
 ﻿using System;
 namespace Casino
 {
-    public class Deck36 : Deck
+    public class Deck52 : Deck
     {
         public new static int deckSize;
         public new int[] cards;
 
-        public Deck36()
+        public Deck52()
         {
-            deckSize = 36;
+            deckSize = 52;
             cards = new int[deckSize];
             FillDeck(cards);
             ShakeDeck(cards);
         }
 
-        public Par36 GetPar(int cardNumber)
+        public Par52 GetPar(int cardNumber)
         {
-            return (Par36)(cardNumber % (deckSize / 4));
+            return (Par52)(cardNumber % (deckSize / 4));
         }
 
         public override string ToString(int cardNumber)
