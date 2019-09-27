@@ -8,7 +8,7 @@ namespace Casino
     {
         private Player player = null;
         private int bet = 0;
-        private Deck gameDeck = new Deck();
+        private Deck36 gameDeck = new Deck36();
         private Queue<int> playersCards = new Queue<int>();
         private Queue<int> croupiersCards = new Queue<int>();
 
@@ -30,11 +30,11 @@ namespace Casino
                 int croupiersCard;
                 ShowDown(decksOnDesk, out playersCard, out croupiersCard);
 
-                if (playersCard % (Deck.deckSize / 4) > croupiersCard % (Deck.deckSize / 4))
+                if (playersCard % (Deck36.deckSize / 4) > croupiersCard % (Deck36.deckSize / 4))
                 {
                     CroupierTakes(decksOnDesk);
                 }
-                else if (playersCard % (Deck.deckSize / 4) < croupiersCard % (Deck.deckSize / 4))
+                else if (playersCard % (Deck36.deckSize / 4) < croupiersCard % (Deck36.deckSize / 4))
                 {
                     PlayerTakes(decksOnDesk);
                 }
@@ -113,11 +113,11 @@ namespace Casino
 
         private void DealingCards()
         {
-            for (int i = 0; i < Deck.deckSize - 1; i += 2)
+            for (int i = 0; i < Deck36.deckSize - 1; i += 2)
             {
                 playersCards.Enqueue(gameDeck.cards[i]);
             }
-            for (int i = 1; i < Deck.deckSize; i += 2)
+            for (int i = 1; i < Deck36.deckSize; i += 2)
             {
                 croupiersCards.Enqueue(gameDeck.cards[i]);
             }

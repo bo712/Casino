@@ -1,12 +1,12 @@
 ﻿using System;
 namespace Casino
 {
-    public class Deck
+    public class Deck36
     {
         public const int deckSize = 36;
         public int[] cards = new int[deckSize];
 
-        public Deck()
+        public Deck36()
         {
             FillDeck(cards);
             ShakeDeck(cards);
