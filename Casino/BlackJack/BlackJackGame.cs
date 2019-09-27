@@ -14,5 +14,13 @@ namespace Casino
         {
             this.player = player;
         }
+        internal void StartGame()
+        {
+            for (int i = 0; i < gameDeck.cards.Length; i++)
+            {
+                Console.WriteLine(gameDeck.ToString(i));
+            }
+            
+        }
     }
 }

@@ -24,6 +24,7 @@ namespace Casino
             Console.WriteLine("Choose the game: ");
             Console.WriteLine("1 - Slot (One hand bandit);");
             Console.WriteLine("2 - Drunkard;");
+            Console.WriteLine("3 - BlackJack;");
             Console.WriteLine("0 - Exit;");
             var choose = Console.ReadLine().Trim();
             Console.WriteLine();
@@ -40,6 +41,7 @@ namespace Casino
                     break;
                 case "3":
                     BlackJackGame bj = new BlackJackGame(player);
+                    bj.StartGame();
                     break;
                 case "0":
                     Console.WriteLine("Thank you for your time! Goodbye!");
