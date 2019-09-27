@@ -6,8 +6,8 @@ namespace Casino
 {
     public class DrunkardGame
     {
-        private Player player = null;
-        private int bet = 0;
+        private Player player;
+        private int bet;
         private Deck36 gameDeck = new Deck36();
         private Queue<int> playersCards = new Queue<int>();
         private Queue<int> croupiersCards = new Queue<int>();

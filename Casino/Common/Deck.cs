@@ -53,5 +53,13 @@ namespace Casino
             return sum;
         }
     }
+
+    public enum Suit
+    {
+        spades,
+        hearts,
+        clubs,
+        diamonds
+    }
 }
 

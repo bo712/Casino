@@ -42,10 +42,7 @@ namespace Casino
                 ConsoleKeyInfo choose = Console.ReadKey();
                 Console.WriteLine();
                 if (choose.KeyChar == ' ') continue;
-                else
-                {
-                    MainMenu.ChooseGame(player);
-                }
+                MainMenu.ChooseGame(player);
             }
             MainMenu.ChooseGame(player);
 

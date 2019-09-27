@@ -19,5 +19,6 @@
   <ItemGroup>
     <Folder Include="Drunkard\" />
     <Folder Include="Common\" />
+    <Folder Include="BlackJack\" />
   </ItemGroup>
 </Project>
