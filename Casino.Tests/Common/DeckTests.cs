@@ -14,7 +14,7 @@ namespace Casino.Tests
             int[] expected = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
             bool filledGood = true;
 
-            Deck36.FillDeck(array);
+            Deck.FillDeck(array);
             for (int i = 0; i < array.Length; i++)
             {
                 if (array[i] != expected[i])
@@ -31,7 +31,7 @@ namespace Casino.Tests
         {
             int[] array = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
             bool allCardsInDeck = true;
-            Deck36.ShakeDeck(array);
+            Deck.ShakeDeck(array);
             for (int i = 0; i < array.Length; i++)
             {
                 if (!array.Contains(i))
@@ -41,6 +41,14 @@ namespace Casino.Tests
                 }
             }
             Assert.IsTrue(allCardsInDeck);
+        }
+
+        [Test]
+        public void CheckSum_Array0_15_Return()
+        {
+            int[] array = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+            int result = Deck.CalculateCheckSum(array);
+            Assert.AreEqual(120, result);
         }
     }
 }

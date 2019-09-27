@@ -18,5 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Drunkard\" />
+    <Folder Include="Common\" />
   </ItemGroup>
 </Project>

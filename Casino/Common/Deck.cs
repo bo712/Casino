@@ -6,7 +6,7 @@ namespace Casino
 {
     public abstract class Deck
     {
-        public int deckSize;
+        protected int deckSize;
         public int[] cards;
 
         public Suit GetSuit(int cardNumber, int deckSize)
@@ -16,7 +16,7 @@ namespace Casino
 
         public abstract string ToString(int cardNumber);
 
-        public void FillDeck(int[] cards)
+        public static void FillDeck(int[] cards)
         {
             for (int i = 0; i < cards.Length; i++)
             {
@@ -24,7 +24,7 @@ namespace Casino
             }
         }
 
-        public void ShakeDeck(int[] cards)
+        public static void ShakeDeck(int[] cards)
         {
             int sumBeforeShake = CalculateCheckSum(cards);
 
@@ -43,7 +43,7 @@ namespace Casino
                 throw new Exception("Bad shaking!");
         }
 
-        private static int CalculateCheckSum(int[] cards)
+        public static int CalculateCheckSum(int[] cards)
         {
             int sum = 0;
             foreach (var card in cards)
