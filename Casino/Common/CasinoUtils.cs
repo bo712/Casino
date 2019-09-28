@@ -5,6 +5,7 @@ namespace Casino
     {
         public static void GetBet(Player plr, ref int bet)
         {
+            Console.WriteLine($"You have ${plr.Amount}. Please, input your bet:");
             while (bet == 0)
             {
                 try

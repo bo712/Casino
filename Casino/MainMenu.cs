@@ -7,11 +7,7 @@ namespace Casino
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter your name:");
-            var name = Console.ReadLine();
-            if (name.Trim() == "") name = "Mister X";
-
-            Player player = new Player(name);
+            Player player = new Player();
             ChooseGame(player);
         }
 

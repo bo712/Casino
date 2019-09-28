@@ -5,6 +5,7 @@ namespace Casino
     {
         public new static int deckSize;
         public new int[] cards;
+        public int pointer;
 
         public Deck52()
         {
@@ -12,9 +13,10 @@ namespace Casino
             cards = new int[deckSize];
             FillDeck(cards);
             ShakeDeck(cards);
+            pointer = deckSize - 1;
         }
 
-        public Par52 GetPar(int cardNumber)
+        public static Par52 GetPar(int cardNumber)
         {
             return (Par52)(cardNumber % (deckSize / 4));
         }
@@ -22,6 +24,11 @@ namespace Casino
         public override string ToString(int cardNumber)
         {
             return GetPar(cardNumber) + " " + GetSuit(cardNumber, deckSize);
+        }
+
+        public static int GetCard(Deck52 deck)
+        {
+            return deck.cards[deck.pointer--];
         }
     }
 }

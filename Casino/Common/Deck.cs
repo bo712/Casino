@@ -9,7 +9,7 @@ namespace Casino
         protected int deckSize;
         public int[] cards;
 
-        public Suit GetSuit(int cardNumber, int deckSize)
+        public static Suit GetSuit(int cardNumber, int deckSize)
         {
             return (Suit)(cardNumber / (deckSize / 4));
         }

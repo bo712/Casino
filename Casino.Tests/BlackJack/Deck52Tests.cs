@@ -39,7 +39,7 @@ namespace Casino.Tests
         {
             Deck52 deck = new Deck52();
             Deck.FillDeck(deck.cards);
-            Assert.AreEqual(deck.GetPar(cardNumber), expected);
+            Assert.AreEqual(Deck52.GetPar(cardNumber), expected);
         }
 
         [TestCase(1, "nine")]
@@ -51,7 +51,22 @@ namespace Casino.Tests
         {
             Deck52 deck = new Deck52();
             Deck.FillDeck(deck.cards);
-            Assert.AreNotEqual(deck.GetPar(cardNumber), expected);
+            Assert.AreNotEqual(Deck52.GetPar(cardNumber), expected);
+        }
+
+        [Test]
+        public void PopCard_ReturnsCardChangePointer()
+        {
+            Deck52 deck = new Deck52();
+            Deck.FillDeck(deck.cards);
+
+            int card = Deck52.GetCard(deck);
+            Assert.AreEqual(51, card);
+            Assert.AreEqual(50, deck.pointer);
+
+            card = Deck52.GetCard(deck);
+            Assert.AreEqual(50, card);
+            Assert.AreEqual(49, deck.pointer);
         }
     }
 }

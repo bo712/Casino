@@ -15,12 +15,11 @@ namespace Casino
         public DrunkardGame(Player player)
         {
             this.player = player;
-            Console.WriteLine($"You have ${player.Amount}. Please, input your bet:");
-            CasinoUtils.GetBet(player, ref bet);
         }
 
         internal void StartGame()
         {
+            CasinoUtils.GetBet(player, ref bet);
             var decksOnDesk = new List<int>();
             DealingCards();
 
@@ -48,37 +47,7 @@ namespace Casino
             }
             EndGame();
             MainMenu.ChooseGame(player);
-
         }
-
-        //private void GetBet(Player plr, )
-        //{
-        //    while (bet == 0)
-        //    {
-        //        try
-        //        {
-        //            bet = int.Parse(Console.ReadLine());
-        //            if (bet > plr.Amount)
-        //            {
-        //                Console.WriteLine("You don't have enough money for that bet. Please enter another amount:");
-        //                bet = 0;
-        //            }
-        //            else if (bet <= 0)
-        //            {
-        //                Console.WriteLine("Bet must have positive value. Please enter another amount:");
-        //            }
-
-        //        }
-        //        catch (System.FormatException)
-        //        {
-        //            Console.WriteLine("Your input is incorrect. Please, input your bet using the numbers:");
-        //        }
-        //        catch (System.OverflowException)
-        //        {
-        //            Console.WriteLine("Your bet is too large. Please, input correct bet.");
-        //        }
-        //    }
-        //}
 
         private void PlayerTakes(List<int> decksOnDesk)
         {
