@@ -24,15 +24,34 @@ namespace Casino
             }
         }
 
+        //public static void ShakeDeck(int[] cards)
+        //{
+        //    int sumBeforeShake = CalculateCheckSum(cards);
+
+        //    for (int i = 0; i < 80000; i++)
+        //    {
+        //        Random random = new Random();
+        //        int indexFrom = random.Next(0, (cards.Length - 1));
+        //        int indexTo = random.Next(0, (cards.Length - 1));
+        //        int temp = cards[indexFrom];
+        //        cards[indexFrom] = cards[indexTo];
+        //        cards[indexTo] = temp;
+        //    }
+
+        //    int sumAfterShake = CalculateCheckSum(cards);
+        //    if (sumBeforeShake != sumAfterShake)
+        //        throw new Exception("Bad shaking!");
+        //}
+
         public static void ShakeDeck(int[] cards)
         {
             int sumBeforeShake = CalculateCheckSum(cards);
 
-            for (int i = 0; i < 8000; i++)
+            for (int i = 0; i < cards.Length - 1; i++)
             {
                 Random random = new Random();
-                int indexFrom = random.Next(0, (cards.Length - 1));
-                int indexTo = random.Next(0, (cards.Length - 1));
+                int indexFrom = i;
+                int indexTo = random.Next(0, (cards.Length));
                 int temp = cards[indexFrom];
                 cards[indexFrom] = cards[indexTo];
                 cards[indexTo] = temp;

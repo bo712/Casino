@@ -22,8 +22,8 @@ namespace Casino
             CasinoUtils.GetBet(player, ref bet);
             DealCardsToPlayer();
             DealCardsToCroupier();
-            PrintPlayersHand(playersHand);
-            PrintCroupiersHand(croupiersHand);
+            PrintPlayersHand();
+            PrintCroupiersHand();
             ChooseWinner();
             MainMenu.ChooseGame(player);
         }
@@ -33,6 +33,7 @@ namespace Casino
             int playersHandPoints = Deck52.CalculatePoints(playersHand);
             int croupiersHandPoints = Deck52.CalculatePoints(croupiersHand);
             Console.WriteLine($"You have {playersHandPoints}, croupier has {croupiersHandPoints}.");
+
             if ((playersHandPoints > 21) ||
                 ((playersHandPoints <= croupiersHandPoints) && (croupiersHandPoints <= 21)))
             {
@@ -57,7 +58,7 @@ namespace Casino
         {
             playersHand.Add(Deck52.GetCard(gameDeck));
             playersHand.Add(Deck52.GetCard(gameDeck));
-            PrintPlayersHand(playersHand);
+            PrintPlayersHand();
             for (int i = 0; i < 5; i++) //maximum number of cards in player's hand can be 7. If more - it's more than 21 point
             {
                 Console.WriteLine("Do you need more cards? Press ENTER if yes, or ESC if no.");
@@ -71,22 +72,22 @@ namespace Casino
         private void DealOneCardToPlayer()
         {
             playersHand.Add(Deck52.GetCard(gameDeck));
-            PrintPlayersHand(playersHand);
+            PrintPlayersHand();
         }
 
-        private void PrintPlayersHand(List<int> plrsCards)
+        private void PrintPlayersHand()
         {
             Console.WriteLine("\nYour cards:");
-            foreach (var card in plrsCards)
+            foreach (var card in playersHand)
             {
                 Console.WriteLine(gameDeck.ToString(card));
             }
         }
 
-        private void PrintCroupiersHand(List<int> crprsCards)
+        private void PrintCroupiersHand()
         {
             Console.WriteLine("\nCroupier's cards:");
-            foreach (var card in crprsCards)
+            foreach (var card in croupiersHand)
             {
                 Console.WriteLine(gameDeck.ToString(card));
             }
