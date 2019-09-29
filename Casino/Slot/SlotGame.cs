@@ -39,13 +39,18 @@ namespace Casino
                 }
 
                 Console.WriteLine("Press SPACE button to continue or any other key to finish the game.");
-                ConsoleKeyInfo choose = Console.ReadKey();
-                Console.WriteLine();
-                if (choose.KeyChar == ' ') continue;
-                MainMenu.ChooseGame(player);
+                if (Console.ReadKey().Key == ConsoleKey.Spacebar)
+                {
+                    Console.WriteLine();
+                    continue;
+                }
+                else
+                {
+                    Console.WriteLine();
+                    MainMenu.ChooseGame(player);
+                }
             }
             MainMenu.ChooseGame(player);
-
         }
 
         private void PrintWin()
