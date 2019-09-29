@@ -14,7 +14,7 @@ namespace Casino.Tests
         public void ToString_CardNumber_ReturnsName(int cardNumber, string expected)
         {
             Deck52 deck = new Deck52();
-            Deck.FillDeck(deck.cards);
+            Deck.FillDeck(deck.cards, 52);
             Assert.AreEqual(deck.ToString(cardNumber), expected);
         }
 
@@ -26,7 +26,7 @@ namespace Casino.Tests
         public void ToString_CardNumber_ReturnsWrongName(int cardNumber, string expected)
         {
             Deck52 deck = new Deck52();
-            Deck.FillDeck(deck.cards);
+            Deck.FillDeck(deck.cards, 52);
             Assert.AreNotEqual(deck.ToString(cardNumber), expected);
         }
 
@@ -38,8 +38,8 @@ namespace Casino.Tests
         public void GetPar_CardNumber_ReturnsPar(int cardNumber, Par52 expected)
         {
             Deck52 deck = new Deck52();
-            Deck.FillDeck(deck.cards);
-            Assert.AreEqual(Deck52.GetPar(cardNumber), expected);
+            Deck.FillDeck(deck.cards, 52);
+            Assert.AreEqual(deck.GetPar(cardNumber), expected);
         }
 
         [TestCase(1, "nine")]
@@ -50,21 +50,21 @@ namespace Casino.Tests
         public void GetPar_CardNumber_ReturnsWrongPar(int cardNumber, Par52 expected)
         {
             Deck52 deck = new Deck52();
-            Deck.FillDeck(deck.cards);
-            Assert.AreNotEqual(Deck52.GetPar(cardNumber), expected);
+            Deck.FillDeck(deck.cards, 52);
+            Assert.AreNotEqual(deck.GetPar(cardNumber), expected);
         }
 
         [Test]
         public void PopCard_ReturnsCardChangePointer()
         {
             Deck52 deck = new Deck52();
-            Deck.FillDeck(deck.cards);
+            Deck.FillDeck(deck.cards, 52);
 
-            int card = Deck52.GetCard(deck);
+            int card = deck.GetCard(deck);
             Assert.AreEqual(51, card);
             Assert.AreEqual(50, deck.pointer);
 
-            card = Deck52.GetCard(deck);
+            card = deck.GetCard(deck);
             Assert.AreEqual(50, card);
             Assert.AreEqual(49, deck.pointer);
         }

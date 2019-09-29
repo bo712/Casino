@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 
@@ -10,14 +11,14 @@ namespace Casino.Tests
         [Test]
         public void FillDeck_10itemsEmptyArray_SortedArray1to10()
         {
-            int[] array = new int[20];
-            int[] expected = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
+            List<int> list = new List<int>();
+            List<int> expected = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
             bool filledGood = true;
 
-            Deck.FillDeck(array);
-            for (int i = 0; i < array.Length; i++)
+            Deck.FillDeck(list, list.Count);
+            for (int i = 0; i < list.Count; i++)
             {
-                if (array[i] != expected[i])
+                if (list[i] != expected[i])
                 {
                     filledGood = false;
                     break;
@@ -29,26 +30,18 @@ namespace Casino.Tests
         [Test]
         public void ShakeDeck_SortedArray_UnsortedArrayWithSameItems()
         {
-            int[] array = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
+            List<int> list = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
             bool allCardsInDeck = true;
-            Deck.ShakeDeck(array);
-            for (int i = 0; i < array.Length; i++)
+            Deck.ShakeDeck(list);
+            for (int i = 0; i < list.Count; i++)
             {
-                if (!array.Contains(i))
+                if (!list.Contains(i))
                 {
                     allCardsInDeck = false;
                     break;
                 }
             }
             Assert.IsTrue(allCardsInDeck);
-        }
-
-        [Test]
-        public void CheckSum_Array0_15_Return()
-        {
-            int[] array = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-            int result = Deck.CalculateCheckSum(array);
-            Assert.AreEqual(120, result);
         }
     }
 }

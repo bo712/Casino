@@ -1,16 +1,13 @@
 ﻿using System;
+
 namespace Casino
 {
     public class Deck36 : Deck
     {
-        public new static int deckSize;
-        public new int[] cards;
-
         public Deck36()
         {
             deckSize = 36;
-            cards = new int[deckSize];
-            FillDeck(cards);
+            FillDeck(cards, deckSize);
             ShakeDeck(cards);
         }
 
@@ -21,7 +18,7 @@ namespace Casino
 
         public override string ToString(int cardNumber)
         {
-            return GetPar(cardNumber) + " " + GetSuit(cardNumber, deckSize);
+            return GetPar(cardNumber) + " " + GetSuit(cardNumber, cards);
         }
     }
 }

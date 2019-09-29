@@ -29,11 +29,11 @@ namespace Casino
                 int croupiersCard;
                 ShowDown(decksOnDesk, out playersCard, out croupiersCard);
 
-                if (playersCard % (Deck36.deckSize / 4) > croupiersCard % (Deck36.deckSize / 4))
+                if (playersCard % (gameDeck.deckSize / 4) > croupiersCard % (gameDeck.deckSize / 4))
                 {
                     CroupierTakes(decksOnDesk);
                 }
-                else if (playersCard % (Deck36.deckSize / 4) < croupiersCard % (Deck36.deckSize / 4))
+                else if (playersCard % (gameDeck.deckSize / 4) < croupiersCard % (gameDeck.deckSize / 4))
                 {
                     PlayerTakes(decksOnDesk);
                 }
@@ -82,11 +82,11 @@ namespace Casino
 
         private void DealingCards()
         {
-            for (int i = 0; i < Deck36.deckSize - 1; i += 2)
+            for (int i = 0; i < gameDeck.deckSize - 1; i += 2)
             {
                 playersCards.Enqueue(gameDeck.cards[i]);
             }
-            for (int i = 1; i < Deck36.deckSize; i += 2)
+            for (int i = 1; i < gameDeck.deckSize; i += 2)
             {
                 croupiersCards.Enqueue(gameDeck.cards[i]);
             }

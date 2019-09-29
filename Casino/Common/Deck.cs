@@ -6,70 +6,36 @@ namespace Casino
 {
     public abstract class Deck
     {
-        protected int deckSize;
-        public int[] cards;
+        public int deckSize;
+        //public int[] cards;
+        public List<int> cards = new List<int>();
 
-        public static Suit GetSuit(int cardNumber, int deckSize)
+        public static Suit GetSuit(int cardNumber, List<int> cards)
         {
-            return (Suit)(cardNumber / (deckSize / 4));
+            return (Suit)(cardNumber / (cards.Count / 4));
         }
 
         public abstract string ToString(int cardNumber);
 
-        public static void FillDeck(int[] cards)
+        public static void FillDeck(List<int> cards, int deckSize)
         {
-            for (int i = 0; i < cards.Length; i++)
+            for (int i = 0; i < deckSize; i++)
             {
-                cards[i] = i;
+                cards.Add(i);
             }
         }
 
-        //public static void ShakeDeck(int[] cards)
-        //{
-        //    int sumBeforeShake = CalculateCheckSum(cards);
-
-        //    for (int i = 0; i < 80000; i++)
-        //    {
-        //        Random random = new Random();
-        //        int indexFrom = random.Next(0, (cards.Length - 1));
-        //        int indexTo = random.Next(0, (cards.Length - 1));
-        //        int temp = cards[indexFrom];
-        //        cards[indexFrom] = cards[indexTo];
-        //        cards[indexTo] = temp;
-        //    }
-
-        //    int sumAfterShake = CalculateCheckSum(cards);
-        //    if (sumBeforeShake != sumAfterShake)
-        //        throw new Exception("Bad shaking!");
-        //}
-
-        public static void ShakeDeck(int[] cards)
+        public static void ShakeDeck(List<int> cards)
         {
-            int sumBeforeShake = CalculateCheckSum(cards);
-
-            for (int i = 0; i < cards.Length - 1; i++)
+            for (int i = 0; i < cards.Count - 1; i++)
             {
                 Random random = new Random();
                 int indexFrom = i;
-                int indexTo = random.Next(0, (cards.Length));
+                int indexTo = random.Next(0, (cards.Count));
                 int temp = cards[indexFrom];
                 cards[indexFrom] = cards[indexTo];
                 cards[indexTo] = temp;
             }
-
-            int sumAfterShake = CalculateCheckSum(cards);
-            if (sumBeforeShake != sumAfterShake)
-                throw new Exception("Bad shaking!");
-        }
-
-        public static int CalculateCheckSum(int[] cards)
-        {
-            int sum = 0;
-            foreach (var card in cards)
-            {
-                sum += card;
-            }
-            return sum;
         }
     }
 

@@ -5,37 +5,33 @@ namespace Casino
 {
     public class Deck52 : Deck
     {
-        public new static int deckSize;
-        public new int[] cards;
         public int pointer;
 
         public Deck52()
         {
             deckSize = 52;
-            cards = new int[deckSize];
-            FillDeck(cards);
+            FillDeck(cards, deckSize);
             ShakeDeck(cards);
             pointer = deckSize - 1;
         }
 
-        public static Par52 GetPar(int cardNumber)
+        public Par52 GetPar(int cardNumber)
         {
             return (Par52)(cardNumber % (deckSize / 4));
         }
 
         public override string ToString(int cardNumber)
         {
-            return GetPar(cardNumber) + " " + GetSuit(cardNumber, deckSize);
+            return GetPar(cardNumber) + " " + GetSuit(cardNumber, cards);
         }
 
-        public static int GetCard(Deck52 deck)
+        public int GetCard(Deck52 deck)
         {
             return deck.cards[deck.pointer--];
         }
 
-        public static int CalculatePoints(List<int> hand)
+        public int CalculatePoints(List<int> hand)
         {
-            hand.Sort();
             var result = 0;
             var acesNum = 0;
 

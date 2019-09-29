@@ -30,8 +30,8 @@ namespace Casino
 
         private void ChooseWinner()
         {
-            int playersHandPoints = Deck52.CalculatePoints(playersHand);
-            int croupiersHandPoints = Deck52.CalculatePoints(croupiersHand);
+            int playersHandPoints = gameDeck.CalculatePoints(playersHand);
+            int croupiersHandPoints = gameDeck.CalculatePoints(croupiersHand);
             Console.WriteLine($"You have {playersHandPoints}, croupier has {croupiersHandPoints}.");
 
             if ((playersHandPoints > 21) ||
@@ -47,19 +47,19 @@ namespace Casino
 
         private void DealCardsToCroupier()
         {
-            while (Deck52.CalculatePoints(croupiersHand) < 20)
+            while (gameDeck.CalculatePoints(croupiersHand) < 17)
             {
-                croupiersHand.Add(Deck52.GetCard(gameDeck));
+                croupiersHand.Add(gameDeck.GetCard(gameDeck));
             }
-            Console.WriteLine(Deck52.CalculatePoints(croupiersHand));
+            Console.WriteLine(gameDeck.CalculatePoints(croupiersHand));
         }
 
         private void DealCardsToPlayer()
         {
-            playersHand.Add(Deck52.GetCard(gameDeck));
-            playersHand.Add(Deck52.GetCard(gameDeck));
+            playersHand.Add(gameDeck.GetCard(gameDeck));
+            playersHand.Add(gameDeck.GetCard(gameDeck));
             PrintPlayersHand();
-            for (int i = 0; i < 5; i++) //maximum number of cards in player's hand can be 7. If more - it's more than 21 point
+            for (int i = 0; i < 11; i++) //maximum number of cards in player's hand can be 11. If more - it's more than 21 point
             {
                 Console.WriteLine("Do you need more cards? Press ENTER if yes, or ESC if no.");
                 if (Console.ReadKey().Key == ConsoleKey.Escape)
@@ -71,7 +71,7 @@ namespace Casino
 
         private void DealOneCardToPlayer()
         {
-            playersHand.Add(Deck52.GetCard(gameDeck));
+            playersHand.Add(gameDeck.GetCard(gameDeck));
             PrintPlayersHand();
         }
 

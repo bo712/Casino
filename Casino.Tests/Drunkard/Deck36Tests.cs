@@ -14,7 +14,7 @@ namespace Casino.Tests
         public void ToString_CardNumber_ReturnsName(int cardNumber, string expected)
         {
             Deck36 deck = new Deck36();
-            Deck.FillDeck(deck.cards);
+            Deck.FillDeck(deck.cards, 36);
             Assert.AreEqual(deck.ToString(cardNumber), expected);
         }
 
@@ -26,7 +26,7 @@ namespace Casino.Tests
         public void ToString_CardNumber_ReturnsWrongName(int cardNumber, string expected)
         {
             Deck36 deck = new Deck36();
-            Deck.FillDeck(deck.cards);
+            Deck.FillDeck(deck.cards, 36);
             Assert.AreNotEqual(deck.ToString(cardNumber), expected);
         }
 
@@ -38,7 +38,7 @@ namespace Casino.Tests
         public void GetPar_CardNumber_ReturnsPar(int cardNumber, Par36 expected)
         {
             Deck36 deck = new Deck36();
-            Deck.FillDeck(deck.cards);
+            Deck.FillDeck(deck.cards, 36);
             Assert.AreEqual(deck.GetPar(cardNumber), expected);
         }
 
@@ -50,7 +50,7 @@ namespace Casino.Tests
         public void GetPar_CardNumber_ReturnsWrongPar(int cardNumber, Par36 expected)
         {
             Deck36 deck = new Deck36();
-            Deck.FillDeck(deck.cards);
+            Deck.FillDeck(deck.cards, 36);
             Assert.AreNotEqual(deck.GetPar(cardNumber), expected);
         }
     }
