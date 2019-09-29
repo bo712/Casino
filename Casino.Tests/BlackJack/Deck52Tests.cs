@@ -54,8 +54,20 @@ namespace Casino.Tests
             Assert.AreNotEqual(deck.GetPar(cardNumber), expected);
         }
 
+        [TestCase(1, "spades")]
+        [TestCase(11, "spades")]
+        [TestCase(21, "hearts")]
+        //[TestCase(31, "seven")]
+        //[TestCase(34, "ten")]
+        public void GetSuit_CardNumber_ReturnsPar(int cardNumber, Suit expected)
+        {
+            Deck52 deck = new Deck52();
+            Deck.FillDeck(deck.cards, 52);
+            Assert.AreEqual(deck.GetSuit(cardNumber, deck.cards), expected);
+        }
+
         [Test]
-        public void PopCard_ReturnsCardChangePointer()
+        public void GetCard_ReturnsCardChangePointer()
         {
             Deck52 deck = new Deck52();
             Deck.FillDeck(deck.cards, 52);

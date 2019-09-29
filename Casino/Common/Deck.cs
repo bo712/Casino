@@ -7,10 +7,9 @@ namespace Casino
     public abstract class Deck
     {
         public int deckSize;
-        //public int[] cards;
         public List<int> cards = new List<int>();
 
-        public static Suit GetSuit(int cardNumber, List<int> cards)
+        public Suit GetSuit(int cardNumber, List<int> cards)
         {
             return (Suit)(cardNumber / (cards.Count / 4));
         }
