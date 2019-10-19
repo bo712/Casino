@@ -1,63 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Casino
+namespace Casino.BlackJack
 {
     class BlackJackGame
     {
-        private Player player;
-        private int bet;
-        private Deck52 gameDeck = new Deck52();
-        private List<int> playersHand = new List<int>();
-        private List<int> croupiersHand = new List<int>();
+        private readonly Player _player;
+        private int _bet;
+        private readonly Deck52 _gameDeck = new Deck52();
+        private readonly List<int> _playersHand = new List<int>();
+        private readonly List<int> _croupiersHand = new List<int>();
 
         public BlackJackGame(Player player)
         {
-            this.player = player;
+            this._player = player;
         }
 
         internal void StartGame()
         {
-            CasinoUtils.GetBet(player, ref bet);
+            CasinoUtils.GetBet(_player, ref _bet);
             DealCardsToPlayer();
             DealCardsToCroupier();
             PrintPlayersHand();
             PrintCroupiersHand();
             ChooseWinner();
-            MainMenu.ChooseGame(player);
+            MainMenu.ChooseGame(_player);
         }
 
         private void ChooseWinner()
         {
-            int playersHandPoints = gameDeck.CalculatePoints(playersHand);
-            int croupiersHandPoints = gameDeck.CalculatePoints(croupiersHand);
+            int playersHandPoints = _gameDeck.CalculatePoints(_playersHand);
+            int croupiersHandPoints = _gameDeck.CalculatePoints(_croupiersHand);
             Console.WriteLine($"You have {playersHandPoints}, croupier has {croupiersHandPoints}.");
 
             if ((playersHandPoints > 21) ||
                 ((playersHandPoints <= croupiersHandPoints) && (croupiersHandPoints <= 21)))
             {
-                player.Amount -= bet;
-                Console.WriteLine($"\nYou LOSE! Your new amount ${player.Amount}.\n");
+                _player.Amount -= _bet;
+                Console.WriteLine($"\nYou LOSE! Your new amount ${_player.Amount}.\n");
                 return;
             }
-            player.Amount += bet;
-            Console.WriteLine($"\nYou WON! Your new amount ${player.Amount}.\n");
+            _player.Amount += _bet;
+            Console.WriteLine($"\nYou WON! Your new amount ${_player.Amount}.\n");
         }
 
         private void DealCardsToCroupier()
         {
-            while (gameDeck.CalculatePoints(croupiersHand) < 17)
+            while (_gameDeck.CalculatePoints(_croupiersHand) < 17)
             {
-                croupiersHand.Add(gameDeck.GetCard(gameDeck));
+                _croupiersHand.Add(_gameDeck.GetCard(_gameDeck));
             }
-            Console.WriteLine(gameDeck.CalculatePoints(croupiersHand));
+            Console.WriteLine(_gameDeck.CalculatePoints(_croupiersHand));
         }
 
         private void DealCardsToPlayer()
         {
-            playersHand.Add(gameDeck.GetCard(gameDeck));
-            playersHand.Add(gameDeck.GetCard(gameDeck));
+            _playersHand.Add(_gameDeck.GetCard(_gameDeck));
+            _playersHand.Add(_gameDeck.GetCard(_gameDeck));
             PrintPlayersHand();
             for (int i = 0; i < 11; i++) //maximum number of cards in player's hand can be 11. If more - it's more than 21 point
             {
@@ -71,25 +70,25 @@ namespace Casino
 
         private void DealOneCardToPlayer()
         {
-            playersHand.Add(gameDeck.GetCard(gameDeck));
+            _playersHand.Add(_gameDeck.GetCard(_gameDeck));
             PrintPlayersHand();
         }
 
         private void PrintPlayersHand()
         {
             Console.WriteLine("\nYour cards:");
-            foreach (var card in playersHand)
+            foreach (var card in _playersHand)
             {
-                Console.WriteLine(gameDeck.ToString(card));
+                Console.WriteLine(_gameDeck.ToString(card));
             }
         }
 
         private void PrintCroupiersHand()
         {
             Console.WriteLine("\nCroupier's cards:");
-            foreach (var card in croupiersHand)
+            foreach (var card in _croupiersHand)
             {
-                Console.WriteLine(gameDeck.ToString(card));
+                Console.WriteLine(_gameDeck.ToString(card));
             }
         }
     }
