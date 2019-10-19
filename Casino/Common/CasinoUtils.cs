@@ -21,7 +21,6 @@ namespace Casino.Common
                     {
                         Console.WriteLine("Bet must have positive value. Please enter another amount:");
                     }
-
                 }
                 catch (System.FormatException)
                 {

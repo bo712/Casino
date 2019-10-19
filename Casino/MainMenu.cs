@@ -21,6 +21,7 @@ namespace Casino
             {
                 NoMoney();
             }
+
             Console.WriteLine("Choose the game: ");
             Console.WriteLine("1 - Slot (One hand bandit);");
             Console.WriteLine("2 - Drunkard;");

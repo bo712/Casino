@@ -41,9 +41,11 @@ namespace Casino.Drunkard
                     Console.WriteLine("\nDispute! Everybody puts one more card on the table.\n");
                     continue;
                 }
+
                 Console.WriteLine($"You have {_playersCards.Count} cards");
                 Console.WriteLine($"Croupier has {_croupiersCards.Count} cards");
             }
+
             EndGame();
             MainMenu.ChooseGame(_player);
         }
@@ -55,6 +57,7 @@ namespace Casino.Drunkard
             {
                 _playersCards.Enqueue(decksOnDesk[i]);
             }
+
             decksOnDesk.Clear();
         }
 
@@ -65,6 +68,7 @@ namespace Casino.Drunkard
             {
                 _croupiersCards.Enqueue(t);
             }
+
             decksOnDesk.Clear();
         }
 
@@ -85,6 +89,7 @@ namespace Casino.Drunkard
             {
                 _playersCards.Enqueue(_gameDeck.Cards[i]);
             }
+
             for (var i = 1; i < _gameDeck.DeckSize; i += 2)
             {
                 _croupiersCards.Enqueue(_gameDeck.Cards[i]);

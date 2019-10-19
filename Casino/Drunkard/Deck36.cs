@@ -13,7 +13,7 @@ namespace Casino.Drunkard
 
         public Par36 GetPar(int cardNumber)
         {
-            return (Par36)(cardNumber % (DeckSize / 4));
+            return (Par36) (cardNumber % (DeckSize / 4));
         }
 
         public override string ToString(int cardNumber)

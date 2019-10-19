@@ -17,7 +17,7 @@ namespace Casino.BlackJack
 
         public Par52 GetPar(int cardNumber)
         {
-            return (Par52)(cardNumber % (DeckSize / 4));
+            return (Par52) (cardNumber % (DeckSize / 4));
         }
 
         public override string ToString(int cardNumber)
@@ -75,11 +75,13 @@ namespace Casino.BlackJack
                         break;
                 }
             }
+
             for (int i = acesNum; i > 0; i--)
             {
                 if (result > 11) break;
                 result += 10;
             }
+
             return result;
         }
     }

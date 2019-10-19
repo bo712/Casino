@@ -4,7 +4,7 @@ using Casino.Common;
 
 namespace Casino.BlackJack
 {
-    class BlackJackGame
+    internal class BlackJackGame
     {
         private readonly Player _player;
         private int _bet;
@@ -41,6 +41,7 @@ namespace Casino.BlackJack
                 Console.WriteLine($"\nYou LOSE! Your new amount ${_player.Amount}.\n");
                 return;
             }
+
             _player.Amount += _bet;
             Console.WriteLine($"\nYou WON! Your new amount ${_player.Amount}.\n");
         }
@@ -51,6 +52,7 @@ namespace Casino.BlackJack
             {
                 _croupiersHand.Add(_gameDeck.GetCard(_gameDeck));
             }
+
             Console.WriteLine(_gameDeck.CalculatePoints(_croupiersHand));
         }
 
@@ -59,14 +61,15 @@ namespace Casino.BlackJack
             _playersHand.Add(_gameDeck.GetCard(_gameDeck));
             _playersHand.Add(_gameDeck.GetCard(_gameDeck));
             PrintPlayersHand();
-            for (var i = 0; i < 11; i++) //maximum number of cards in player's hand can be 11. If more - it's more than 21 point
+            for (var i = 0;
+                i < 11;
+                i++) //maximum number of cards in player's hand can be 11. If more - it's more than 21 point
             {
                 Console.WriteLine("Do you need more cards? Press ENTER if yes, or ESC if no.");
                 if (Console.ReadKey().Key == ConsoleKey.Escape)
                     break;
                 DealOneCardToPlayer();
             }
-
         }
 
         private void DealOneCardToPlayer()

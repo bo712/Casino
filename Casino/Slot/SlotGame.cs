@@ -26,6 +26,7 @@ namespace Casino.Slot
                     PrintNoMoney();
                     break;
                 }
+
                 _player.Amount -= Bet;
                 _slot.RunSlot();
 
@@ -50,6 +51,7 @@ namespace Casino.Slot
                     MainMenu.ChooseGame(_player);
                 }
             }
+
             MainMenu.ChooseGame(_player);
         }
 

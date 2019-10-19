@@ -10,7 +10,7 @@ namespace Casino.Common
 
         public static Suit GetSuit(int cardNumber, List<int> cards)
         {
-            return (Suit)(cardNumber / (cards.Count / 4));
+            return (Suit) (cardNumber / (cards.Count / 4));
         }
 
         public abstract string ToString(int cardNumber);
@@ -45,4 +45,3 @@ namespace Casino.Common
         diamonds
     }
 }
-

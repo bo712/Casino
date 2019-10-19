@@ -22,7 +22,8 @@ namespace Casino.Slot
 
             foreach (var item in this.reels)
             {
-                item.CurrentPosition = (item.CurrentPosition + (getEffort / item.RotationSpeed)) % Reel.NumberOfPositions;
+                item.CurrentPosition =
+                    (item.CurrentPosition + (getEffort / item.RotationSpeed)) % Reel.NumberOfPositions;
             }
 
             PrintReels();
@@ -35,6 +36,7 @@ namespace Casino.Slot
             {
                 Console.Write($"{this.reels[i].CurrentPosition} ");
             }
+
             Console.WriteLine();
         }
 
@@ -49,6 +51,7 @@ namespace Casino.Slot
                     break;
                 }
             }
+
             return isReelsEqual;
         }
     }
