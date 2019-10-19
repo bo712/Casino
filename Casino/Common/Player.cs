@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Casino
+
+namespace Casino.Common
 {
     public class Player
     {

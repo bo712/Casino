@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Threading;
 using Casino.BlackJack;
+using Casino.Common;
+using Casino.Drunkard;
+using Casino.Slot;
 
 namespace Casino
 {
-    public class MainMenu
+    public static class MainMenu
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Player player = new Player();
+            var player = new Player();
             ChooseGame(player);
         }
 
@@ -23,21 +26,21 @@ namespace Casino
             Console.WriteLine("2 - Drunkard;");
             Console.WriteLine("3 - BlackJack;");
             Console.WriteLine("0 - Exit;");
-            var choose = Console.ReadLine().Trim();
+            var choose = Console.ReadLine()?.Trim();
             Console.WriteLine();
 
             switch (choose)
             {
                 case "1":
-                    SlotGame slotGame = new SlotGame(player);
+                    var slotGame = new SlotGame(player);
                     slotGame.StartGame();
                     break;
                 case "2":
-                    DrunkardGame drunkardGame = new DrunkardGame(player);
+                    var drunkardGame = new DrunkardGame(player);
                     drunkardGame.StartGame();
                     break;
                 case "3":
-                    BlackJackGame bj = new BlackJackGame(player);
+                    var bj = new BlackJackGame(player);
                     bj.StartGame();
                     break;
                 case "0":

@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Casino
+namespace Casino.Common
 {
     public abstract class Deck
     {
-        public int deckSize;
-        public List<int> cards = new List<int>();
+        public int DeckSize;
+        public readonly List<int> Cards = new List<int>();
 
-        public Suit GetSuit(int cardNumber, List<int> cards)
+        public static Suit GetSuit(int cardNumber, List<int> cards)
         {
             return (Suit)(cardNumber / (cards.Count / 4));
         }
@@ -18,7 +17,7 @@ namespace Casino
 
         public static void FillDeck(List<int> cards, int deckSize)
         {
-            for (int i = 0; i < deckSize; i++)
+            for (var i = 0; i < deckSize; i++)
             {
                 cards.Add(i);
             }
@@ -26,12 +25,12 @@ namespace Casino
 
         public static void ShakeDeck(List<int> cards)
         {
-            for (int i = 0; i < cards.Count - 1; i++)
+            for (var i = 0; i < cards.Count - 1; i++)
             {
-                Random random = new Random();
-                int indexFrom = i;
-                int indexTo = random.Next(0, (cards.Count));
-                int temp = cards[indexFrom];
+                var random = new Random();
+                var indexFrom = i;
+                var indexTo = random.Next(0, (cards.Count));
+                var temp = cards[indexFrom];
                 cards[indexFrom] = cards[indexTo];
                 cards[indexTo] = temp;
             }

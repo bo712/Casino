@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Casino.Common;
 
 namespace Casino.BlackJack
 {
@@ -8,25 +9,25 @@ namespace Casino.BlackJack
 
         public Deck52()
         {
-            deckSize = 52;
-            FillDeck(cards, deckSize);
-            ShakeDeck(cards);
-            Pointer = deckSize - 1;
+            DeckSize = 52;
+            FillDeck(Cards, DeckSize);
+            ShakeDeck(Cards);
+            Pointer = DeckSize - 1;
         }
 
         public Par52 GetPar(int cardNumber)
         {
-            return (Par52)(cardNumber % (deckSize / 4));
+            return (Par52)(cardNumber % (DeckSize / 4));
         }
 
         public override string ToString(int cardNumber)
         {
-            return GetPar(cardNumber) + " " + GetSuit(cardNumber, cards);
+            return GetPar(cardNumber) + " " + GetSuit(cardNumber, Cards);
         }
 
         public int GetCard(Deck52 deck)
         {
-            return deck.cards[deck.Pointer--];
+            return deck.Cards[deck.Pointer--];
         }
 
         public int CalculatePoints(List<int> hand)

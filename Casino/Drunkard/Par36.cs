@@ -1,5 +1,4 @@
-﻿using System;
-namespace Casino
+﻿namespace Casino.Drunkard
 {
     public enum Par36
     {

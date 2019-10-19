@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Casino.Common;
 using NUnit.Framework;
 
-namespace Casino.Tests
+namespace Casino.Tests.Common
 {
     [TestFixture]
     public class DeckTests
@@ -11,36 +11,20 @@ namespace Casino.Tests
         [Test]
         public void FillDeck_10itemsEmptyArray_SortedArray1to10()
         {
-            List<int> list = new List<int>();
-            List<int> expected = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
-            bool filledGood = true;
+            var list = new List<int>();
+            var expected = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
 
             Deck.FillDeck(list, list.Count);
-            for (int i = 0; i < list.Count; i++)
-            {
-                if (list[i] != expected[i])
-                {
-                    filledGood = false;
-                    break;
-                }
-            }
+            var filledGood = !list.Where((t, i) => t != expected[i]).Any();
             Assert.IsTrue(filledGood);
         }
 
         [Test]
         public void ShakeDeck_SortedArray_UnsortedArrayWithSameItems()
         {
-            List<int> list = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
-            bool allCardsInDeck = true;
+            var list = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
             Deck.ShakeDeck(list);
-            for (int i = 0; i < list.Count; i++)
-            {
-                if (!list.Contains(i))
-                {
-                    allCardsInDeck = false;
-                    break;
-                }
-            }
+            var allCardsInDeck = !list.Where((t, i) => !list.Contains(i)).Any();
             Assert.IsTrue(allCardsInDeck);
         }
     }

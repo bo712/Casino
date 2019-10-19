@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Casino
+
+namespace Casino.Slot
 {
     public class Slot
     {
@@ -21,7 +22,7 @@ namespace Casino
 
             foreach (var item in this.reels)
             {
-                item.CurrentPosition = (item.CurrentPosition + (getEffort / item.RotationSpeed)) % Reel.numberOfPositions;
+                item.CurrentPosition = (item.CurrentPosition + (getEffort / item.RotationSpeed)) % Reel.NumberOfPositions;
             }
 
             PrintReels();

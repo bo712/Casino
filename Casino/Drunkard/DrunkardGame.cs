@@ -1,39 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using Casino.Common;
 
-namespace Casino
+namespace Casino.Drunkard
 {
     public class DrunkardGame
     {
-        private Player player;
-        private int bet;
-        private Deck36 gameDeck = new Deck36();
-        private Queue<int> playersCards = new Queue<int>();
-        private Queue<int> croupiersCards = new Queue<int>();
+        private readonly Player _player;
+        private int _bet;
+        private readonly Deck36 _gameDeck = new Deck36();
+        private readonly Queue<int> _playersCards = new Queue<int>();
+        private readonly Queue<int> _croupiersCards = new Queue<int>();
 
         public DrunkardGame(Player player)
         {
-            this.player = player;
+            _player = player;
         }
 
         internal void StartGame()
         {
-            CasinoUtils.GetBet(player, ref bet);
+            CasinoUtils.GetBet(_player, ref _bet);
             var decksOnDesk = new List<int>();
             DealingCards();
 
-            while (playersCards.Count != 0 && croupiersCards.Count != 0)
+            while (_playersCards.Count != 0 && _croupiersCards.Count != 0)
             {
-                int playersCard;
-                int croupiersCard;
-                ShowDown(decksOnDesk, out playersCard, out croupiersCard);
+                ShowDown(decksOnDesk, out var playersCard, out var croupiersCard);
 
-                if (playersCard % (gameDeck.deckSize / 4) > croupiersCard % (gameDeck.deckSize / 4))
+                if (playersCard % (_gameDeck.DeckSize / 4) > croupiersCard % (_gameDeck.DeckSize / 4))
                 {
                     CroupierTakes(decksOnDesk);
                 }
-                else if (playersCard % (gameDeck.deckSize / 4) < croupiersCard % (gameDeck.deckSize / 4))
+                else if (playersCard % (_gameDeck.DeckSize / 4) < croupiersCard % (_gameDeck.DeckSize / 4))
                 {
                     PlayerTakes(decksOnDesk);
                 }
@@ -42,67 +41,67 @@ namespace Casino
                     Console.WriteLine("\nDispute! Everybody puts one more card on the table.\n");
                     continue;
                 }
-                Console.WriteLine($"You have {playersCards.Count} cards");
-                Console.WriteLine($"Croupier has {croupiersCards.Count} cards");
+                Console.WriteLine($"You have {_playersCards.Count} cards");
+                Console.WriteLine($"Croupier has {_croupiersCards.Count} cards");
             }
             EndGame();
-            MainMenu.ChooseGame(player);
+            MainMenu.ChooseGame(_player);
         }
 
-        private void PlayerTakes(List<int> decksOnDesk)
+        private void PlayerTakes(IList<int> decksOnDesk)
         {
             Console.WriteLine("You take the cards.\n");
-            for (int i = decksOnDesk.Count - 1; i >= 0; i--)
+            for (var i = decksOnDesk.Count - 1; i >= 0; i--)
             {
-                playersCards.Enqueue(decksOnDesk[i]);
+                _playersCards.Enqueue(decksOnDesk[i]);
             }
             decksOnDesk.Clear();
         }
 
-        private void CroupierTakes(List<int> decksOnDesk)
+        private void CroupierTakes(IList<int> decksOnDesk)
         {
             Console.WriteLine("Croupier takes the cards.\n");
-            for (int i = 0; i < decksOnDesk.Count; i++)
+            foreach (var t in decksOnDesk)
             {
-                croupiersCards.Enqueue(decksOnDesk[i]);
+                _croupiersCards.Enqueue(t);
             }
             decksOnDesk.Clear();
         }
 
         private void ShowDown(List<int> decksOnDesk, out int playersCard, out int croupiersCard)
         {
-            playersCard = playersCards.Dequeue();
-            croupiersCard = croupiersCards.Dequeue();
+            playersCard = _playersCards.Dequeue();
+            croupiersCard = _croupiersCards.Dequeue();
             decksOnDesk.Add(playersCard);
             decksOnDesk.Add(croupiersCard);
-            Console.WriteLine($"Your card - {gameDeck.ToString(playersCard)}");
-            Console.WriteLine($"Croupier's card - {gameDeck.ToString(croupiersCard)}");
+            Console.WriteLine($"Your card - {_gameDeck.ToString(playersCard)}");
+            Console.WriteLine($"Croupier's card - {_gameDeck.ToString(croupiersCard)}");
             Thread.Sleep(100);
         }
 
         private void DealingCards()
         {
-            for (int i = 0; i < gameDeck.deckSize - 1; i += 2)
+            for (var i = 0; i < _gameDeck.DeckSize - 1; i += 2)
             {
-                playersCards.Enqueue(gameDeck.cards[i]);
+                _playersCards.Enqueue(_gameDeck.Cards[i]);
             }
-            for (int i = 1; i < gameDeck.deckSize; i += 2)
+            for (var i = 1; i < _gameDeck.DeckSize; i += 2)
             {
-                croupiersCards.Enqueue(gameDeck.cards[i]);
+                _croupiersCards.Enqueue(_gameDeck.Cards[i]);
             }
         }
 
         private void EndGame()
         {
-            if (playersCards.Count < croupiersCards.Count)
+            if (_playersCards.Count < _croupiersCards.Count)
             {
-                player.Amount += bet;
-                Console.WriteLine($"\nYou WON! Your new amount ${player.Amount}.\n");
+                _player.Amount += _bet;
+                Console.WriteLine($"\nYou WON! Your new amount ${_player.Amount}.\n");
             }
             else
             {
-                player.Amount -= bet;
-                Console.WriteLine($"\nYou LOSE! Your new amount ${player.Amount}.\n");
+                _player.Amount -= _bet;
+                Console.WriteLine($"\nYou LOSE! Your new amount ${_player.Amount}.\n");
             }
         }
     }

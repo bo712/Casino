@@ -1,36 +1,37 @@
 ﻿using System;
 using System.Threading;
+using Casino.Common;
 
-namespace Casino
+namespace Casino.Slot
 {
     public class SlotGame
     {
-        private const int bet = 10;
-        private const int prize = 1000;
-        Player player;
-        Slot slot;
+        private const int Bet = 10;
+        private const int Prize = 1000;
+        private readonly Player _player;
+        private readonly Slot _slot;
 
         public SlotGame(Player player)
         {
-            this.player = player;
-            this.slot = new Slot();
+            this._player = player;
+            this._slot = new Slot();
         }
 
         public void StartGame()
         {
             while (true)
             {
-                if (player.Amount < bet)
+                if (_player.Amount < Bet)
                 {
                     PrintNoMoney();
                     break;
                 }
-                player.Amount -= bet;
-                slot.RunSlot();
+                _player.Amount -= Bet;
+                _slot.RunSlot();
 
-                if (slot.isWin())
+                if (_slot.isWin())
                 {
-                    player.Amount += prize + bet;
+                    _player.Amount += Prize + Bet;
                     PrintWin();
                 }
                 else
@@ -42,22 +43,21 @@ namespace Casino
                 if (Console.ReadKey().Key == ConsoleKey.Spacebar)
                 {
                     Console.WriteLine();
-                    continue;
                 }
                 else
                 {
                     Console.WriteLine();
-                    MainMenu.ChooseGame(player);
+                    MainMenu.ChooseGame(_player);
                 }
             }
-            MainMenu.ChooseGame(player);
+            MainMenu.ChooseGame(_player);
         }
 
         private void PrintWin()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine($"------------------You WON ${prize}!!!------------------\n");
-            Console.WriteLine($"Your new amount is ${player.Amount}\n");
+            Console.WriteLine($"------------------You WON ${Prize}!!!------------------\n");
+            Console.WriteLine($"Your new amount is ${_player.Amount}\n");
             Console.WriteLine("------------------Let's play more!------------------\n");
             Thread.Sleep(2000);
             Console.ResetColor();
@@ -66,10 +66,10 @@ namespace Casino
         private void PrintLose()
         {
             Console.WriteLine("You LOSE!!!");
-            Console.WriteLine($"Your new amount is ${player.Amount}");
+            Console.WriteLine($"Your new amount is ${_player.Amount}");
         }
 
-        private void PrintNoMoney()
+        private static void PrintNoMoney()
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("You have no money for one more bet!");

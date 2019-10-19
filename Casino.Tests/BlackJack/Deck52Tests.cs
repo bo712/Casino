@@ -1,8 +1,8 @@
-﻿using System;
-using Casino.BlackJack;
+﻿using Casino.BlackJack;
+using Casino.Common;
 using NUnit.Framework;
 
-namespace Casino.Tests
+namespace Casino.Tests.BlackJack
 {
     [TestFixture]
     public class Deck52Tests
@@ -14,7 +14,7 @@ namespace Casino.Tests
         [TestCase(35, "joker clubs")]
         public void ToString_CardNumber_ReturnsName(int cardNumber, string expected)
         {
-            Deck52 deck = new Deck52();
+            var deck = new Deck52();
             Assert.AreEqual(deck.ToString(cardNumber), expected);
         }
 
@@ -25,7 +25,7 @@ namespace Casino.Tests
         [TestCase(35, "six diamonds")]
         public void ToString_CardNumber_ReturnsWrongName(int cardNumber, string expected)
         {
-            Deck52 deck = new Deck52();
+            var deck = new Deck52();
             Assert.AreNotEqual(deck.ToString(cardNumber), expected);
         }
 
@@ -36,7 +36,7 @@ namespace Casino.Tests
         [TestCase(34, "ten")]
         public void GetPar_CardNumber_ReturnsPar(int cardNumber, Par52 expected)
         {
-            Deck52 deck = new Deck52();
+            var deck = new Deck52();
             Assert.AreEqual(deck.GetPar(cardNumber), expected);
         }
 
@@ -47,7 +47,7 @@ namespace Casino.Tests
         [TestCase(34, "nine")]
         public void GetPar_CardNumber_ReturnsWrongPar(int cardNumber, Par52 expected)
         {
-            Deck52 deck = new Deck52();
+            var deck = new Deck52();
             Assert.AreNotEqual(deck.GetPar(cardNumber), expected);
         }
 
@@ -58,16 +58,16 @@ namespace Casino.Tests
         [TestCase(50, "diamonds")]
         public void GetSuit_CardNumber_ReturnsPar(int cardNumber, Suit expected)
         {
-            Deck52 deck = new Deck52();
-            Assert.AreEqual(deck.GetSuit(cardNumber, deck.cards), expected);
+            var deck = new Deck52();
+            Assert.AreEqual(Deck.GetSuit(cardNumber, deck.Cards), expected);
         }
 
         [Test]
         public void GetCard_ReturnsCardChangePointer()
         {
-            Deck52 deck = new Deck52();
-            deck.cards.Sort();
-            int card = deck.GetCard(deck);
+            var deck = new Deck52();
+            deck.Cards.Sort();
+            var card = deck.GetCard(deck);
             Assert.AreEqual(51, card);
             Assert.AreEqual(50, deck.Pointer);
 

@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Casino.Drunkard;
 using NUnit.Framework;
 
-namespace Casino.Tests
+namespace Casino.Tests.Drunkard
 {
     [TestFixture]
     public class Deck36Tests
@@ -13,7 +13,7 @@ namespace Casino.Tests
         [TestCase(35, "ace diamonds")]
         public void ToString_CardNumber_ReturnsName(int cardNumber, string expected)
         {
-            Deck36 deck = new Deck36();
+            var deck = new Deck36();
             Assert.AreEqual(deck.ToString(cardNumber), expected);
         }
 
@@ -24,7 +24,7 @@ namespace Casino.Tests
         [TestCase(35, "six diamonds")]
         public void ToString_CardNumber_ReturnsWrongName(int cardNumber, string expected)
         {
-            Deck36 deck = new Deck36();
+            var deck = new Deck36();
             Assert.AreNotEqual(deck.ToString(cardNumber), expected);
         }
 
@@ -35,7 +35,7 @@ namespace Casino.Tests
         [TestCase(34, "king")]
         public void GetPar_CardNumber_ReturnsPar(int cardNumber, Par36 expected)
         {
-            Deck36 deck = new Deck36();
+            var deck = new Deck36();
             Assert.AreEqual(deck.GetPar(cardNumber), expected);
         }
 
@@ -46,7 +46,7 @@ namespace Casino.Tests
         [TestCase(34, "nine")]
         public void GetPar_CardNumber_ReturnsWrongPar(int cardNumber, Par36 expected)
         {
-            Deck36 deck = new Deck36();
+            var deck = new Deck36();
             Assert.AreNotEqual(deck.GetPar(cardNumber), expected);
         }
     }
