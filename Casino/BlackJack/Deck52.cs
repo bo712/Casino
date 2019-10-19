@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Casino
+namespace Casino.BlackJack
 {
     public class Deck52 : Deck
     {
-        public int pointer;
+        public int Pointer;
 
         public Deck52()
         {
             deckSize = 52;
             FillDeck(cards, deckSize);
             ShakeDeck(cards);
-            pointer = deckSize - 1;
+            Pointer = deckSize - 1;
         }
 
         public Par52 GetPar(int cardNumber)
@@ -27,7 +26,7 @@ namespace Casino
 
         public int GetCard(Deck52 deck)
         {
-            return deck.cards[deck.pointer--];
+            return deck.cards[deck.Pointer--];
         }
 
         public int CalculatePoints(List<int> hand)

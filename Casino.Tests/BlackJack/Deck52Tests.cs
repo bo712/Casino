@@ -1,4 +1,5 @@
 ﻿using System;
+using Casino.BlackJack;
 using NUnit.Framework;
 
 namespace Casino.Tests
@@ -68,11 +69,11 @@ namespace Casino.Tests
             deck.cards.Sort();
             int card = deck.GetCard(deck);
             Assert.AreEqual(51, card);
-            Assert.AreEqual(50, deck.pointer);
+            Assert.AreEqual(50, deck.Pointer);
 
             card = deck.GetCard(deck);
             Assert.AreEqual(50, card);
-            Assert.AreEqual(49, deck.pointer);
+            Assert.AreEqual(49, deck.Pointer);
         }
     }
 }

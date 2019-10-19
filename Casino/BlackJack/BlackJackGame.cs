@@ -29,8 +29,8 @@ namespace Casino.BlackJack
 
         private void ChooseWinner()
         {
-            int playersHandPoints = _gameDeck.CalculatePoints(_playersHand);
-            int croupiersHandPoints = _gameDeck.CalculatePoints(_croupiersHand);
+            var playersHandPoints = _gameDeck.CalculatePoints(_playersHand);
+            var croupiersHandPoints = _gameDeck.CalculatePoints(_croupiersHand);
             Console.WriteLine($"You have {playersHandPoints}, croupier has {croupiersHandPoints}.");
 
             if ((playersHandPoints > 21) ||
@@ -58,7 +58,7 @@ namespace Casino.BlackJack
             _playersHand.Add(_gameDeck.GetCard(_gameDeck));
             _playersHand.Add(_gameDeck.GetCard(_gameDeck));
             PrintPlayersHand();
-            for (int i = 0; i < 11; i++) //maximum number of cards in player's hand can be 11. If more - it's more than 21 point
+            for (var i = 0; i < 11; i++) //maximum number of cards in player's hand can be 11. If more - it's more than 21 point
             {
                 Console.WriteLine("Do you need more cards? Press ENTER if yes, or ESC if no.");
                 if (Console.ReadKey().Key == ConsoleKey.Escape)
